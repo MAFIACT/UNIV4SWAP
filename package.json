@@ -1,0 +1,32 @@
+{
+  "name": "0x-swap-api",
+  "version": "1.0.0",
+  "description": "Application pour effectuer des swaps avec l'API 0x",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node start-railway.js",
+    "local": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "example": "node examples/swap-example.js",
+    "railway": "node start-railway.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "ethers": "^6.10.0",
+    "node-fetch": "^3.3.2",
+    "node-telegram-bot-api": "^0.66.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0"
+  },
+  "keywords": [
+    "0x",
+    "swap",
+    "defi",
+    "ethereum",
+    "api"
+  ],
+  "author": "",
+  "license": "MIT"
+}
