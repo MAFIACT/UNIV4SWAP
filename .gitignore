@@ -1,6 +1,7 @@
 # Fichiers sensibles à NE JAMAIS uploader
 .env
 info.env
+RAILWAY-VARIABLES.txt
 
 # Dépendances Node.js
 node_modules/
