@@ -1,95 +1,122 @@
-# Bot Telegram 0x - Interface Bananagun
+# 🚀 Bot Telegram 0x - Interface Bananagun Style
 
-Bot Telegram automatise pour le trading de tokens sur Base Network avec interface style Bananagun.
+Bot Telegram avancé pour le trading sur Base network avec interface Bananagun, utilisant l'API 0x pour des swaps ultra-rapides.
 
-## Fonctionnalites
+## ✨ Fonctionnalités
 
-- Interface Bananagun : Detection automatique des adresses de contrat
-- Trading rapide : Boutons 0.1, 0.2, 0.5 ETH + montant personnalise
-- Vente automatique : Interface de vente apres achat avec pourcentages
-- Optimise vitesse : Transactions en 2-4 secondes
-- Base Network : Trading sur Base avec 0x API
+### 🎯 Interface Bananagun
+- **Détection automatique** des contrats Ethereum
+- **Informations token** instantanées (nom, DEX, market cap, liquidité, taxes)
+- **Boutons rapides** : 0.1 ETH, 0.2 ETH, 0.5 ETH + montant personnalisé
+- **Interface de vente** automatique avec calculs profit/perte
+- **Boutons de vente** par pourcentage : 25%, 50%, 75%, 100%
 
-## Structure
+### ⚡ Performance
+- **Swaps ultra-rapides** : 2-4 secondes sur Base
+- **Optimisations gas** : +300% premium pour vitesse maximale
+- **Slippage optimisé** : 0.05% pour réduire les échecs
+- **Polling accéléré** : 150ms pour confirmations rapides
 
+### 🔒 Sécurité
+- **Variables d'environnement** pour toutes les données sensibles
+- **Compatible Railway** pour déploiement 24/7
+- **Aucune donnée sensible** dans le code public
+
+## 🛠️ Installation Locale
+
+1. **Cloner le repository**
+```bash
+git clone https://github.com/MAFIACT/UNIV4SWAP.git
+cd UNIV4SWAP
 ```
-src/                 # Code source principal
-├── index.js         # Point d'entree
-├── telegramBot.js   # Bot Telegram avec interface Bananagun
-├── swapManager.js   # Gestionnaire de swaps
-├── zeroXApi.js      # API 0x
-└── config.js        # Configuration
 
-examples/            # Exemples et tests
-start-railway.js     # Script de demarrage Railway
-package.json         # Dependances
-info.env            # Configuration locale
-```
-
-## Installation Locale
-
-1. Installer les dependances :
+2. **Installer les dépendances**
 ```bash
 npm install
 ```
 
-2. Configurer les variables :
-   - Copier `.env.example` vers `.env`
-   - Remplir vos vraies cles API et private key dans `.env`
-   - ⚠️ **JAMAIS commiter le fichier `.env`** (protege par .gitignore)
-
-3. Demarrer le bot :
-```bash
-npm run local
+3. **Configuration**
+Créez un fichier `.env` avec vos variables :
+```env
+ZEROX_API_KEY=votre_cle_api_0x
+PRIVATE_KEY=votre_cle_privee
+TAKER_ADDRESS=votre_adresse_wallet
+TELEGRAM_BOT_TOKEN=votre_token_telegram
+RPC_URL=https://mainnet.base.org
+CHAIN_ID=8453
 ```
 
-## Deploiement Railway
-
-1. **Connecter le repository GitHub a Railway**
-2. **Configurer les variables d'environnement** (voir `RAILWAY-VARIABLES.md`)
-3. **Variables requises :**
-   - `ZEROX_API_KEY` - Votre cle API 0x
-   - `PRIVATE_KEY` - Votre cle privee wallet
-   - `TAKER_ADDRESS` - Votre adresse wallet
-   - `TELEGRAM_BOT_TOKEN` - Votre token bot Telegram
-   - `RPC_URL=https://mainnet.base.org`
-   - `CHAIN_ID=8453`
-   - `NODE_ENV=production`
-
-4. **Railway demarre automatiquement** avec `npm start`
-
-📋 **Guide detaille :** Voir `RAILWAY-VARIABLES.md`
-
-## Git Automatique
-
-Utilisation du script Git integre :
+4. **Démarrer le bot**
 ```bash
-# Commit et push rapide
-.\commit-push.ps1 "Message de commit"
-
-# Ou avec message par defaut
-.\commit-push.ps1
+npm start
 ```
 
-## Securite
+## 🚀 Déploiement Railway (24/7)
 
-- Fichiers sensibles proteges par .gitignore
-- Cles privees jamais uploadees sur GitHub
-- Configuration via variables d'environnement
-- Repository public securise
+### Étapes de déploiement :
 
-## Performance
+1. **Créer un projet Railway**
+   - Aller sur [railway.app](https://railway.app)
+   - Créer un nouveau projet
+   - Connecter ce repository : `https://github.com/MAFIACT/UNIV4SWAP`
 
-- Temps moyen : 2.6-4.5 secondes par transaction
-- Optimisations : Slippage 0.05%, gas premium +300%
-- Fallback : Gas price minimum 5 gwei
+2. **Configurer les variables d'environnement**
+   Dans Railway Dashboard > Settings > Variables, ajouter :
+   ```
+   ZEROX_API_KEY=votre_cle_api_0x
+   PRIVATE_KEY=votre_cle_privee
+   TAKER_ADDRESS=votre_adresse_wallet
+   TELEGRAM_BOT_TOKEN=votre_token_telegram
+   RPC_URL=https://mainnet.base.org
+   CHAIN_ID=8453
+   NODE_ENV=production
+   ```
 
-## Liens
+3. **Déploiement automatique**
+   Railway déploiera automatiquement votre bot après configuration.
 
-- Repository : https://github.com/MAFIACT/v4-swapp
-- Base Network : Chain ID 8453
-- 0x API : Documentation officielle
+## 🎮 Utilisation
+
+1. **Démarrer une conversation** avec votre bot Telegram
+2. **Coller une adresse de contrat** Ethereum
+3. **Voir les informations** du token automatiquement
+4. **Cliquer sur les boutons** pour acheter (0.1, 0.2, 0.5 ETH ou montant personnalisé)
+5. **Interface de vente** apparaît automatiquement après achat
+6. **Vendre par pourcentage** ou montant personnalisé
+
+## 📊 Réseaux Supportés
+
+- **Base Mainnet** (Chain ID: 8453)
+- **RPC**: https://mainnet.base.org
+
+## 🔧 Architecture
+
+```
+src/
+├── config.js          # Configuration et variables d'environnement
+├── index.js           # Point d'entrée principal
+├── swapManager.js     # Gestionnaire des swaps 0x
+├── telegramBot.js     # Bot Telegram avec interface Bananagun
+└── zeroXApi.js        # Client API 0x
+
+examples/
+├── telegram-bot-start.js  # Démarrage du bot
+└── price-check.js         # Vérification des prix
+
+start-railway.js       # Script de démarrage Railway
+```
+
+## ⚠️ Sécurité
+
+- **Jamais de clés privées** dans le code
+- **Variables d'environnement** uniquement
+- **Fichiers sensibles** protégés par `.gitignore`
+- **Déploiement sécurisé** sur Railway
+
+## 📝 Licence
+
+MIT License - Voir le fichier LICENSE pour plus de détails.
 
 ---
 
-Bot developpe pour le trading automatise sur Base Network 
+**⚡ Bot Telegram ultra-rapide pour trading DeFi sur Base network avec interface Bananagun professionnelle !** 
