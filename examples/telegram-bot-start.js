@@ -1,8 +1,14 @@
 import { startTelegramBot } from '../src/telegramBot.js';
 import { CONFIG } from '../src/config.js';
+import dotenv from 'dotenv';
 
-// Configuration du bot Telegram
-const TELEGRAM_BOT_TOKEN = '7764242820:AAGWzwH0A3m6MVksET-8GpZUSBpzFd6OX5o'; // Remplacez par votre token
+// Charger .env seulement en local (pas sur Railway)
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
+
+// Configuration du bot Telegram depuis les variables d'environnement
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 
 // IDs Telegram autorisés (optionnel - laissez vide pour autoriser tout le monde)
 const AUTHORIZED_USER_IDS = [
@@ -15,22 +21,27 @@ async function main() {
   console.log('🚀 Démarrage du Bot Telegram 0x');
   console.log('================================');
   
-  // Vérifier la configuration
-  if (!CONFIG.ZEROX_API_KEY) {
-    console.error('❌ ZEROX_API_KEY manquante dans .env');
-    process.exit(1);
+  // Vérifier que toutes les variables d'environnement sont présentes
+  const requiredEnvVars = [
+    'ZEROX_API_KEY',
+    'PRIVATE_KEY', 
+    'TAKER_ADDRESS',
+    'TELEGRAM_BOT_TOKEN'
+  ];
+
+  let missingVars = [];
+  for (const envVar of requiredEnvVars) {
+    if (!process.env[envVar]) {
+      missingVars.push(envVar);
+    }
   }
-  
-  if (!CONFIG.PRIVATE_KEY) {
-    console.error('❌ PRIVATE_KEY manquante dans .env');
-    process.exit(1);
-  }
-  
-  if (TELEGRAM_BOT_TOKEN === 'VOTRE_TOKEN_ICI') {
-    console.error('❌ Veuillez configurer TELEGRAM_BOT_TOKEN');
-    console.error('   1. Créez un bot avec @BotFather sur Telegram');
-    console.error('   2. Obtenez le token');
-    console.error('   3. Remplacez VOTRE_TOKEN_ICI dans ce fichier');
+
+  if (missingVars.length > 0) {
+    console.error('❌ Variables d\'environnement manquantes:');
+    missingVars.forEach(varName => {
+      console.error(`   - ${varName}`);
+    });
+    console.error('\n🔧 Créez un fichier .env avec ces variables ou configurez-les sur Railway');
     process.exit(1);
   }
   

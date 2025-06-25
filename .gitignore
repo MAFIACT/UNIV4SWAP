@@ -2,6 +2,7 @@
 .env
 info.env
 RAILWAY-VARIABLES.txt
+railway-variables-local.txt
 
 # Dépendances Node.js
 node_modules/
